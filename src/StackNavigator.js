@@ -1,22 +1,35 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import useAuth from './hooks/useAuth';
+import HomeScreen from './screens/HomeScreen';
+import { Login } from './screens/LoginScreen';
+import {Modal} from './screens/ModalScreen';
 
 const Stack = createNativeStackNavigator();
 
-const StackNavigator = () => {
-    const {user} = useAuth
+ const StackNavigator = () => {
+    const {user} = useAuth();
 
  return (
- <Stack.Navigator>
+ <Stack.Navigator ScreenOptions={{
+     headerShown: false,
+ }}>
      {user ? (
      <>
-     <Stack.Screen name="Home" componet={HomeScreen}/>
-     <Stack.Screen name="Chat" componet={ChatScreen}/>
+     <Stack.Group>
+     <Stack.Screen name="Home" component={HomeScreen}/>
+     <Stack.Screen name="Chat" component={ChatScreen}/>
+     </Stack.Group>
+     <Stack.Group screenOptions={{ presentation: "modal"}}>
+    <Stack.Screen name="Modal" component={ModalScreen}/>
+     </Stack.Group>
      </>
      ) : (
-     <Stack.Screen name="Login" componet={LoginScreen}/>
+     <Stack.Screen name="Login" component={LoginScreen}
+     />
      )}
  </Stack.Navigator>
  );
 }
+
+export default StackNavigator;

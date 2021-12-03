@@ -1,5 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
+import { LogBox } from 'react-native';
+LogBox.ignoreAllLogs();
 import tw from 'tailwind-rn';
 import { AuthProvider } from './src/hooks/useAuth';
 import {NavigationContainer} from '@react-navigation/native';
